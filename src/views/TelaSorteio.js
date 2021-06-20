@@ -1,5 +1,5 @@
+import React,{ useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import React,{useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, ImageBackground, TextInput, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -7,11 +7,10 @@ import { database } from '../config/firebase';
 
 const TelaSorteio = () =>{
     const navigation = useNavigation();
-    const [valor,setValor] = useState('');
+    const [valor, setValor] = useState('');
     const [participantes, setParticipantes] = useState([]);
-    var vencedor;
-    var stop;
-    var numeroSorteado;
+    var stop,numeroSorteado;
+    nomeParticipante="";
 
     useEffect(()=>{
         database.collection('participantes').onSnapshot((query) =>{
@@ -24,15 +23,11 @@ const TelaSorteio = () =>{
         })
     },[])
 
-    const confere = () =>{
       {participantes.map((participante) => {
-          if(numeroSorteado == participante.numero){
-              vencedor=participante.nome
-          }else{
-              vencedor="Não entregou !"+numeroSorteado
+          if(valor == participante.numero){
+            nomeParticipante = participante.nome
           }
-      })}
-    }
+       })}
 
     const sortear = () =>{   
         var rodar=setInterval( function() {
@@ -40,15 +35,14 @@ const TelaSorteio = () =>{
         setValor(""+numeroSorteado+"");
 
         if(stop == 1){
-          confere();
           clearInterval(rodar);
           setValor(""+numeroSorteado+"");
           setTimeout( function() {
-                if(vencedor == "Não entregou !"){
-                    alert(vencedor)
-                }else{
-                    alert("Parabéns "+vencedor+" o número "+numeroSorteado+" foi sorteado !!!");
-                }
+            if(nomeParticipante == ""){
+              alert("Não entregou !")
+            }else{
+              alert("Parabéns "+nomeParticipante+" o número "+numeroSorteado+" foi sorteado !!!")
+            }
           }, 2000 );
         }
         temporizador();

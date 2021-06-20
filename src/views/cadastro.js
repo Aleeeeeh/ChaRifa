@@ -7,11 +7,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { database } from '../config/firebase';
 
 const cadastro = () =>{
+    const navigation = useNavigation();
     const [nome, setNome] = useState('');
     const [numero, setNumero] = useState('');
     const [participantes, setParticipantes] = useState([]);
-    jaExiste = 0
-    nomeParticipante = ""
+    jaExiste = 0;
+    nomeParticipante = "";
 
     useEffect(()=>{
         database.collection('participantes').onSnapshot((query) =>{
@@ -51,7 +52,6 @@ const cadastro = () =>{
         }
     }
 
-        const navigation = useNavigation();
         return(
             <ScrollView style={{backgroundColor:'#fff'}}>
                 <TouchableOpacity style={styles.botaoVoltar}>
@@ -84,13 +84,13 @@ const cadastro = () =>{
                     />
                 </View>
                 <TouchableOpacity style={styles.lista}>
-                        <AntDesign 
-                        name="team" 
-                        size={40} 
-                        color="black"
-                        onPress={()=>navigation.navigate('Lista')} />
-                    </TouchableOpacity>
-                    <Text style={{textAlign:'center',color:'red'}}>Clique para ver participantes</Text>
+                    <AntDesign 
+                    name="team" 
+                    size={40} 
+                    color="black"
+                    onPress={()=>navigation.navigate('Lista')} />
+                </TouchableOpacity>
+                <Text style={{textAlign:'center',color:'red'}}>Clique para ver participantes</Text>
             </ScrollView>
         );
     }
