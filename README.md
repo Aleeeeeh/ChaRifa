@@ -23,7 +23,7 @@ Banco de dados NOSql firebase <br />
 ![Firebase](https://github.com/Aleeeeeh/ChaRifa/assets/58706720/1dfe1795-c626-4a66-ae87-3e618151ca82)
 
 #### Autor
-Alefe Ferreira da Silva
+Alefe Ferreira da Silva <br />
 https://www.linkedin.com/in/alefe-ferreira-322125235/
 
 
